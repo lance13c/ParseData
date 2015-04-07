@@ -1,0 +1,14 @@
+Data Guide
+
+
+So this is a mess, and I'm sorry. It was hard to run experiments 
+throughout the day and come back every time.
+
+This is what is true for every dataset:
+
+1. Each Text document has a control run and an experiment run, 
+seperated by a break.
+
+2. For the purposes of analysis, only the last 15 minutes of each 
+control is relevant, as well as the first 90 minutes of each experiment
+run.
