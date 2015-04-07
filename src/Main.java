@@ -38,15 +38,47 @@ public class Main{
             cell = row.createCell(1);
             cell.setCellValue("Total Minutes");
             cell = row.createCell(2);
-            cell.setCellValue("Total Seconds");
+            cell.setCellValue("Seconds");
             cell = row.createCell(3);
             cell.setCellValue("Temp in Celsius");
+            cell = row.createCell(4);
+            cell.setCellValue("Total Seconds");
 
 
 
             if (buffer.ready()) {
+                int index1 = 1;
                 while ((line = buffer.readLine()) != null) {
-                    System.out.println(line);
+                    String[] parseLine = line.split(",");
+                    String first = parseLine[0].split(":")[0];
+
+
+
+                    if (first.equals("Entry")){
+                        row = sheet.createRow(index1);
+                        index1 += 1;
+                        int index2= 0;
+                        for (String s: parseLine){
+                            String[] entry = s.split(":");
+                            String name = entry[0];
+                            String value = entry[1];
+                            double valueD = Double.valueOf(value.replace(" ",""));
+
+                            cell = row.createCell(index2);
+                            cell.setCellValue(valueD);
+                            //System.out.println(s);
+                            index2 += 1;
+                        }
+                        String min = "-1";
+                        String sec = "-1";
+                        min = parseLine[1].split(":")[1];
+                        sec = parseLine[2].split(":")[1];
+                        double minD = Double.valueOf(min);
+                        double secD = Double.valueOf(sec);
+                        cell = row.createCell(4);
+                        cell.setCellValue((minD*60)+secD);
+                    }
+                    //System.out.println(line);
                 }
                 buffer.close();
             }
